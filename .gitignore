@@ -1,3 +1,4 @@
 .idea
 /LeetcodePractice/venv
 /LeetcodePractice/*.exe
+.DS_Store

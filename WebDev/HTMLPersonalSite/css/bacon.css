@@ -1,0 +1,44 @@
+h1
+{
+  color: red;
+  font-size: 200px;
+}
+
+img
+{
+  background-color: green;
+}
+
+/*psudo class*/
+img:hover
+{
+  background-color: gold;
+}
+/*****************Class Selector*********************/
+.green
+{
+  background-color: green;
+}
+
+.red
+{
+  background-color: red;
+}
+
+.big
+{
+  width: 200px;
+  height: 200px;
+}
+
+.circular
+{
+  border-radius: 100%;
+}
+
+/**ID is unique, but class is not**/
+/*****************ID Selector*********************/
+#heading
+{
+  color: blue;
+}

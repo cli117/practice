@@ -1,0 +1,59 @@
+html:
+a代表anchor，后面跟href来链接到其他页面
+
+link去连接external css
+优先级：inline css > internal css > external css
+
+link设置icon来改变网页前面的图标
+
+css:
+很多element可以用一个class，一个element也可以属于很多class，多个class之间空格隔开
+每个element只能有一个id，每个id在一个页面上只能有一个
+
+.classname
+{
+
+}
+
+#idname
+{
+
+}
+
+
+box结构：
+width, height: 宽，高，可指定固定长或者百分比
+boder: 边界，可以是solid实线或者none没有或者dotted点 等等
+boder-width: 边界宽度，可以四个分别制定 比如0px 10px 20px 30px
+padding: 内容到boder的距离
+margin: border外的区域宽度
+
+block elements: 一个element占一行
+eg: paragraphs<p>, headers<h1>~<h6>, divisions<div>, lists and list items<ol>, <ul> and <li>, forms<form>
+
+inline elements: 一个element只占他本身的大小
+eg: spans<span>, images<img>, anchors<a>
+
+display:
+block（无法多个同行）或者
+inline（无法更改宽度）或者
+inline-block（可以多个同行可以改宽度）或者
+none（不显示，直接消失）
+img默认是inline-block，因为img可以改宽高且可以几个图在一行
+
+visibility:
+hidden：位置还占着，只是看不到
+
+position:
+static(默认)
+relative(相对默认移动，向相反的方向移动，如right是向左移动（右边加margin），本身box占着位置，其他element不会顶上来)
+absolute(相对parent的绝对位置，right 20px就是相对parent最右边往左20px，本身box不再占static element的位置，其他element会顶上来)
+fixed(网页上下左右翻，位置不变)
+
+位置参数:
+top: 50px;
+bottom: 50px;
+left: 50px;
+right: 50px;
+
+parent的text-align参数，如果一个block element设置了宽度则不能被居中，要用margin: 0 auto 来居中

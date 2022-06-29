@@ -57,3 +57,26 @@ left: 50px;
 right: 50px;
 
 parent的text-align参数，如果一个block element设置了宽度则不能被居中，要用margin: 0 auto 来居中
+
+
+font-size:
+1. 100% = 16px(默认设置下) = 1em, 改为百分比或者em，用户在浏览器中调整字体大小时可以跟着调整
+2. inherited, 如body中设置为2em，h1中设置5em， 最终h1为10em。static font-size不受影响，如body 20px, h1 90px
+如果parent有raletive字体大小设置(% 或者 em)，子element可以用rem来无视parent的设置
+
+float: 会使元素向左或向右移动,其周围的元素也会重新排列
+clear: 清除parent的float
+少用float和clear（只有在图边上放字的时候），用relative absolute margin padding等等去排位置
+
+
+bootstrap:
+Responsive layout:
+<div class="row">
+  <div class="col-lg-2 col-md-3 col-sm-6" style="backgroud-color:red; border: 1px solid">
+    col-lg-2 col-md-3 col-sm-6
+  </div>
+</div>
+大屏下占2个单位宽，中屏幕下占3个单位宽，小屏幕下占6个单位宽，一屏一共12个单位宽
+
+container:
+自动responsive，占全宽的一部分

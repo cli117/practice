@@ -68,6 +68,18 @@ float: 会使元素向左或向右移动,其周围的元素也会重新排列
 clear: 清除parent的float
 少用float和clear（只有在图边上放字的时候），用relative absolute margin padding等等去排位置
 
+// 应用于container-fluid class里面的id为title的元素（父子结构）
+.container-fluid #title
+{
+
+}
+// 应用于元素同时有多个class/id/html elements，如一个element属于container-fluid同时id为title
+.container-fluid#title
+{
+
+}
+
+优先级：id selectors > class selectors > html elements selectors
 
 bootstrap:
 Responsive layout:
@@ -80,3 +92,401 @@ Responsive layout:
 
 container:
 自动responsive，占全宽的一部分
+
+
+js:
+document.querySelector("h1").classList.add("huge");
+document.querySelector("h1").classList.remove("huge");
+document.querySelector("h1").classList.toggle("huge");
+
+innerHTML包括<strong></strong>等tag，而textContent不包括，只有纯文本
+
+document.querySelector("a").getAttribute("href");
+document.querySelector("a").setAttribute("href", "https://www.bing.com");
+
+
+// higher order functions
+function add(num1, num2)
+{
+  return num1+num2;
+}
+
+function multiply(num1, num2)
+{
+  return num1*num2;
+}
+
+function calculator(num1, num2, operator)
+{
+  return operator(num1, num2);
+}
+
+calculator(2, 5, add); // returns 7
+calculator(2, 5, multiply) // returns 10
+
+
+// OOP
+function BellBoy(name)
+{
+  this.name = name;
+  this.moveSuitcase = function()
+  {
+    alert("move!")
+  }
+}
+
+
+jQuery:
+$("h1").css("color", "red");                // setter
+$("h1").css("color");                       // getter
+$("h1").addClass("big-title margin-50");    // classList.add("big-title") classList.add("margin-50")
+$("h1").removeClass("big-title");           // classList.remove("big-title")
+$("h1").hasClass("big-title");              // return true or false
+$("h1").text("Bye");                        // modifies all h1's textContent
+$("h1").html("<em>Bye</em>");               // modifies all h1's innerHTML
+$("img").attr("src");                       // getter
+$("a").attr("href", "www.baidu.com");       // setter
+$("h1").attr("class");                      // returns all the classes, that is class itself is a attribute
+$("button").click(function()
+{
+  $("h1").css("color", "purple");
+});                                         // add onclick callback
+
+$("input").keydown(function(event)
+{
+  console.log(event.key);
+});
+
+$("h1").on("mouseover", function()
+{
+  $("h1").css("color", "purple");
+});                                         // can also be "click" or any other event list in MDN web docs
+
+$("h1").before("<button>New Btn</button>");   // Add a button before h1 <button>New Btn</button><h1>Hello!</h1>
+$("h1").after("<button>New Btn</button>");    // Add a button after h1  <h1>Hello!</h1><button>New Btn</button>
+$("h1").prepend("<button>New Btn</button>");  // Add a button in h1 but before the content <h1><button>New Btn</button>Hello!</h1>
+$("h1").append("<button>New Btn</button>");   // Add a button in h1 but after the content  <h1>Hello!<button>New Btn</button></h1>
+
+$("h1").hide();
+$("h1").show();
+$("h1").toggle();
+$("h1").fadeOut();
+$("h1").fadeIn();
+$("h1").fadeToggle();
+$("h1").slideUp();
+$("h1").slideDown();
+$("h1").slideToggle();
+
+$("h1").animate({
+  opacity: 0.5;
+  margin: "20%";
+});                                         // can only animate numeric values
+
+$("h1").slideUp().slideDown().animate({opacity: 0.5}); // functions will be executed sequentially
+
+
+
+
+
+
+
+express-node:
+bodyParser可以读取post输入 通过req.body.num1
+
+放到网上的网页要把本地文件夹用app.use(express.static("public")); 设置成public
+
+res.redirect("/");
+
+res.write("balbal");
+res.write("balbal");
+res.send();          // write 可以写多行，然后一起send
+
+app.set('view engine', 'ejs');
+
+<%-include("header");-%>
+<%-include("footer");-%> // 重用代码，相当于把header.ejs footer.ejs插入到include的地方
+
+app.get("/:route", function(req, res) {  // variable
+  console.log(req.params.route);
+});
+
+<input type="hidden" name="listName" value="<%= listTitle %>"></input> // 可以在form里面向服务器传一个变量，且input不显示，不影响布局
+<input type="checkbox" name="checkbox" value="<%= newListItems[i]._id %>"
+onChange="this.form.submit()"> // onChange设置之后可以在checkbox变化的时候向服务器传变量，以代替type="submit"的button
+
+const date = require(__dirname + "/date.js");
+
+export: 详见todolist-v2的date.js，工具库的写法
+
+
+SQL语法：
+创表：
+CREATE TABLE products (
+  ID int NOT NULL,
+  name STRING,
+  price MONEY,
+  PRIMARY KEY (id)
+);
+
+增：
+INSERT INTO products
+VALUES (1, "Pen", 1.20)
+
+INSERT INTO products (id, name)
+VALUES (2, "Pencil")
+
+查：
+SELECT * FROM products
+SELECT * FROM products WHERE id=1
+
+改：
+UPDATE products
+SET price = 0.80
+WHERE id = 2          // 改某一行
+
+ALTER TABLE products
+ADD stock INT         // 加一列
+
+ALTER TABLE products
+DROP stock            // 删一列
+
+删：
+DELETE FROM products
+WHERE name = "Pencil"
+
+Relationship：
+CREATE TABLE orders (
+  id INT NOT NULL,
+  order_number INT,
+  customer_id, INT,
+  product_id, INT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (customer_id) REFERENCES customer(id),
+  FOREIGN KEY (product_id) REFERENCES products(id)
+);
+// 表之间的联系
+
+JOIN:
+SELECT <column names you want to select>
+FROM <table 1 where the foreign key is found>
+INNER JOIN <table 2 you want to join with table 1> ON <table 1 foreign key> = <table 2 primary key>
+
+SELECT orders.order_number, customers.first_name, customers.last_name, customers.address
+FROM orders
+INNER JOIN customers ON orders.customer_id = customers.id
+
+
+
+
+
+
+MONGO DB:
+brew services start mongodb-community // 在后台起服务
+mongosh //进入控制台
+use dbname // 进入数据库
+
+增删改查见文档
+db.products.insertOne({ _id: 1, name: "Pen", price: 1.20})
+db.products.find({price: {$gt: 1}})         // gt = greater than
+db.products.find({ _id: 1}, {_id:0, name: 1})      // 设置返回哪几列，1返回0不返回，不填全部返回，id默认返回（除非设置成0）
+db.products.updateOne({_id: 1}, {$set: {stock: 32}}) // 设置stock的值，如果没有就添加上
+db.products.deleteOne({_id: 1})
+
+xxxOne的都有对应的xxxMany函数来批量操作
+
+Relationship:
+db.products.insert(
+{
+  _id: 3,
+  name: "Rubber",
+  price: 1.3,
+  reviews: [
+    {
+      authorName: "Sally",
+      rating: 5,
+      review: "Best rubber ever!"
+    },
+    {
+      authorName: "John",
+      rating: 5,
+      review: "Awesome rubber!"
+    }
+  ]
+}
+)
+
+
+
+
+
+mongoose:
+
+数据结构可以带validation
+const fruitSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: ["true", "Please check your data entry, no name specified!"]
+  },
+  rating: {
+    type: Number,
+    min: [1, "From 1 to 10"],
+    max: [10, "From 1 to 10"]
+  },
+  review: String
+});
+
+const Fruit = mongoose.model("Fruit", fruitSchema);
+
+const apple = new Fruit({
+  name: "Apple",
+  rating: 7,
+  review: "blabla!"
+});
+
+apple.save();
+
+const kiwi = new Fruit({
+  name: "Kiwi",
+  rating: 10,
+  review: "Best!"
+});
+
+const banana = new Fruit({
+  name: "Banana",
+  rating: 3,
+  review: "Weird texture."
+});
+
+Fruit.insertMany([kiwi, banana], function(err){
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Successfully saved");
+  }
+});
+
+Fruit.find(function(err, fruits) {
+  if (err) {
+    console.log(err);
+  } else {
+    mongoose.connection.close();
+    fruits.forEach(function(fruit) {
+      console.log(fruit.name);
+    });
+  }
+});
+
+Fruit.updateOne({_id: "63434c2fff7febf81efe839c"}, {name: "Peach"}, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Updated");
+  }
+});
+
+Fruit.deleteOne({name:"Peach"}, function(err){
+  if (err){
+    console.log(err);
+  } else {
+    console.log("Deleted");
+  }
+});
+
+Fruit.deleteMany({name:"John"}, function(err){
+  if (err){
+    console.log(err);
+  } else {
+    console.log("Deleted");
+  }
+});
+
+Relationship:
+const personSchema = new mongoose.Schema({
+  name: String,
+  age: Number,
+  favouriteFruit: fruitSchema
+});
+const Person = mongoose.model("Person", personSchema);
+
+const pineapple = new Fruit({
+  name: "Pineapple",
+  rating: 9,
+  review: "Good!"
+})
+
+const amy = new Person({
+  name: "Amy",
+  age: 12,
+  favouriteFruit: pineapple
+});
+
+
+
+
+RESTful API:
+GET: READ
+POST: CREATE
+PUT/PATCH: UPDATE
+  PUT: updating the database with a new Object // 直接换货一辆新自行车
+  PATCH: updating the database with a piece of data within a existing object // 只更换坏掉的前轮
+DELETE: DELETE
+
+
+HTTP Verbs              /articles               /articles/jack-bauer
+GET             Fetches all the articles     Fetches the articles on jack-bauer
+POST              Creates one new article                  -
+PUT                         -                 Updates the article on jack-bauer
+PATCH                       -                 Updates the article on jack-bauer
+DELETE            Deletes all the articles     Deletes the article on jack-bauer
+
+
+
+React.JS:
+· 都有一个div id为root，是react application的root，内部填充react代码
+· Babel is a JS compiler
+· 可以在JS的html代码中加入大括号{}，大括号中可以放任何JS expressions，但是不能写逻辑代码，比如if else等等
+· React中js里的html如果添加inline styling，那么需要style = {customStyle} where customStyle is a JS Object,
+useful when you need to change the style on the fly.
+
+const customStyle = {
+  color: "red",
+  fontSize: "20px"
+}
+
+<h1 style={customStyle}>Hello world!</h1>
+
+export default pi;
+import pi from "./math.js";
+
+export {pi, someFunction};
+
+import {pi, someFunction} from "./someJS.js";
+someFunction();
+or
+
+import * as someJS from "./someJS.js";
+someJS.someFunction();
+
+function Cards(props) {
+  const cards = props.contactsList.map((info) => {
+    return <Card {...info} />;
+  });
+  return cards;
+}
+
+key关键字是react保留关键字，传入component后不可读取
+
+
+filter: Create a new array by keeping the items that return true
+const newNumbers = numbers.filter(function (num) {
+  return num > 10;
+});
+
+reduce: Accumulate a value by doing something to each item in an array
+
+var newNumber = numbers.reduce(function(accumulator, currentNumber){
+  return accumulator + currentNumber;
+});
+// Add all numbers in the array and assign to newNumber
+
+find

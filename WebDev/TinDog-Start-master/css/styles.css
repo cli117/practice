@@ -1,6 +1,7 @@
 body
 {
   font-family: "Montserrat"
+  text-align: center;
 }
 
 h1
@@ -44,24 +45,26 @@ p
 
 .container-fluid
 {
-  padding: 3% 15%;
+  padding: 3% 15% 7%;
 }
 
 #title
 {
   background-color: #ff4c68;
   color: white;
+  text-align: left;
 }
 
 #features
 {
   padding: 7% 15%;
+  background-color: #fff;
+  position: relative;
 }
 
 #testimonials
 {
   padding: 7% 15%;
-  text-align: center;
   background-color: #EF8172;
   color: white;
 }
@@ -69,8 +72,13 @@ p
 #press
 {
   background-color: #EF8172;
-  text-align: center;
+
   padding-bottom: 3%;
+}
+
+#pricing
+{
+  padding: 100px;
 }
 
 /* Navigation Bar */
@@ -107,13 +115,15 @@ p
 /* Title Image */
 .title-img
 {
-  width: 60%;
-  transform: rotate(25deg);
+  width: 15%;
+  transform: rotate(25deg) translateX(-50%);;
+  position: absolute;
+
 }
 
 .feature-item
 {
-  text-align: center;
+
   padding: 5%;
 }
 
@@ -133,4 +143,14 @@ p
 .carousel-item
 {
   padding: 7% 15%;
+}
+
+@media only screen and (max-width: 1028px)
+{
+  .title-img
+  {
+    position: static;
+    transform: rotate(0);
+    width: 25%;
+  }
 }
